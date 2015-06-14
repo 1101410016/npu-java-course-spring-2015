@@ -30,17 +30,30 @@ package tw.edu.npu.mis;
  *
  * @author Samael Wang <freesamael@gmail.com>
  */
-public class View {
+public class View implements Observer, Showable{
 
     private final String mName;
     private final Window mWindow;
     private final Model mModel;
+    /**
+     * view的抽象類別 參數的建構式如下
+     * @param name 
+     * @param window 
+     * @param model 
+     */
 
     public View(String name, Window window, Model model) {
         mName = name;
         mWindow = window;
         mModel = model;
+         mModel.attach(this);
     }
+    /**
+     *把View加入Window類別裡View陣列中 
+     */
+    /**
+     * Invalidate the view, which indicates it needs to be redrawn later.
+     */
 
     /**
      * Invalidate the view, which indicates it needs to be redrawn later.
@@ -54,6 +67,14 @@ public class View {
      */
     public void onDraw() {
         System.out.println("View (" + mName + "): " + mModel.getData());
+    }
+     /**
+     * Model的資料有新增的話, 就會呼叫View
+     */ 
+
+    @Override
+    public void update() {
+        invalidate();
     }
 
 }

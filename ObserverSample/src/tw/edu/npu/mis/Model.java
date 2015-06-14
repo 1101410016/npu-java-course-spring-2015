@@ -30,7 +30,7 @@ package tw.edu.npu.mis;
  *
  * @author Samael Wang <freesamael@gmail.com>
  */
-public class Model {
+public class Model extends Subject {
 
     private String mData;
 
@@ -47,9 +47,11 @@ public class Model {
      * Update model.
      *
      * @param data A {@link String} data.
+     * this.notifyObserver() 通知Model中有註冊的所有View
      */
-    public void setData(String data) {
+  public void setData(String data) {
         mData = data;
+        notifyObserver();
     }
 
 }
